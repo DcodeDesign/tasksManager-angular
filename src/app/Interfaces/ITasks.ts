@@ -5,6 +5,6 @@ export interface ITasks {
   id?: number;
   name: string;
   duration?: string;
-  isTerminated?: boolean;
+  isTerminated: boolean;
   catId?: object;
 }

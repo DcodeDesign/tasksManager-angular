@@ -1,3 +1,17 @@
-<p>
-  ici
-</p>
+<h2>{{ editCurrentTask.name }}</h2>
+<form [formGroup]="reactForm" (ngSubmit)="onSubmit()">
+  <input type="hidden" value="{{ editCurrentTask.id }}" name="id" class="validate" formControlName="id">
+  <div>
+    <label>Changer le nom de la tâche : </label> <br>
+    <input type="text" value="{{ editCurrentTask.name }}" name="name" class="validate" formControlName="name"/>
+  </div>
+
+  <div>
+    <label>Etat de la tâche : </label> <br>
+    <select name="isTerminated" class="validate" formControlName="isTerminated">
+      <option [selected]='editCurrentTask.isTerminated === true'>Tâche fini</option>
+      <option [selected]='editCurrentTask.isTerminated === false'>Tâche en cours</option>
+    </select>
+  </div>
+  <button type="submit">Mettre à jours</button>
+</form>

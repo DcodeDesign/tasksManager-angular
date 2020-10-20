@@ -1,10 +1,23 @@
 <h1>Tasks</h1>
-<input #taskDesc matInput maxlength="255" (keydown)=" onPressEnterPostTask($event);">
-<button (click)="multiDeleted()">Delete</button>
+<input #taskDesc matInput maxlength="255" (keydown)="postTask($event);"><button>Create</button><button>Search</button>
+
+<div>
+  <button (click)="multiDeletion()">Delete Multiple</button>
+  <p id="deleteMessage" style="display:none;">Supression en traitement...</p>
+</div>
+
 <ul>
   <li *ngFor="let task of tasks">
-    <input type="checkbox" class="multiDeleted" id="taskId{{ task.id }}" name="{{ task.name }}" value="{{ task.id }}" > Name :   - Id : {{ task.id }} - Finish : {{ task.isTerminated }} - Durée : {{ task.duration }}  <button (click)="delete(task.id)">Delete {{ task.id }}</button>
+    <input type="checkbox" class="multiDeleted" id="taskId{{ task.id }}" name="{{ task.name }}" value="{{ task.id }}" >
+    - Name : {{ task.name }}
+    - Id : {{ task.id }}
+    - Finish : {{ task.isTerminated }}
+    - Durée : {{ task.duration }}
+
+    <button (click)="taskFinished(task)">Finish</button>
+    <button (click)="editTask(task)">Edit</button>
+    <button>Timer</button>
+    <button (click)="deleteTask(task.id)">Delete</button>
   </li>
 </ul>
-<app-edit-task *ngIf="test"
-               [edit]="editTaskId"></app-edit-task>
+<app-edit-task *ngIf="editTaskActive"  [editCurrentTask]="editCurrentTask" (updateCurrentTask)="getTasks()"></app-edit-task>

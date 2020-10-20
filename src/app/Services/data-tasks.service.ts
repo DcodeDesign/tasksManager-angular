@@ -20,7 +20,7 @@ export class DataTasksService {
   };
 
   // tslint:disable-next-line:typedef
-  private log(message: string) {
+  private static log(message: string) {
     console.log(`${message}`);
   }
 
@@ -32,7 +32,7 @@ export class DataTasksService {
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
+      DataTasksService.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
@@ -51,7 +51,7 @@ export class DataTasksService {
 
   public postTask(task: ITasks): Observable<ITasks> {
     return this.http.post<ITasks>(this.apiUrlTasks, task, this.httpOptions).pipe(
-      tap((newTask: ITasks) => this.log(`Post w/ id=${newTask.id}`)),
+      tap((newTask: ITasks) => DataTasksService.log(`Post w/ id=${newTask.id}`)),
       catchError(this.handleError<ITasks>('post Task'))
     );
   }
@@ -62,6 +62,7 @@ export class DataTasksService {
       atId = task['@id'];
       atId = atId.split('/').pop();
     } else {
+      // @ts-ignore
       atId = task.id.toString();
       atId = atId.split('/').pop();
     }
@@ -69,7 +70,8 @@ export class DataTasksService {
     const url = `${this.apiUrlTasks}/${atId}`;
     return this.http.put(url, task, this.httpOptions)
       .pipe(
-        tap(_ => this.log(`updated todo id=${task.id}`)),
+        // @ts-ignore
+        tap(_ => DataTasksService.log(`updated todo id=${task.id}`)),
         catchError(this.handleError<any>('updateTask'))
       );
   }
@@ -79,7 +81,7 @@ export class DataTasksService {
     const url = `${this.apiUrlTasks}/${atId}`;
 
     return this.http.delete<ITasks>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted task id=${atId}`)),
+      tap(_ => DataTasksService.log(`deleted task id=${atId}`)),
       catchError(this.handleError<ITasks>('delete task'))
     );
   }

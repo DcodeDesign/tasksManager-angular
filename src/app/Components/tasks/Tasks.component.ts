@@ -8,10 +8,11 @@ import {ITasks} from '../../Interfaces/ITasks';
   styleUrls: ['./Tasks.component.scss']
 })
 export class TasksComponent implements OnInit {
-  public tasks: ITasks[] = [];
-  values = '';
-  public arrayDeleteElem = [];
-  test = true;
+  public tasks: ITasks[] ;
+  public values = '';
+  public test = true;
+  public editCurrentTask: any;
+  public editTaskActive: boolean;
 
   constructor(private dataTasksService: DataTasksService) {
   }
@@ -23,7 +24,10 @@ export class TasksComponent implements OnInit {
   public getTasks(): void {
     this.dataTasksService.getTasks()
       .subscribe(
-        (value: ITasks[]) => this.tasks = value,
+        (value: ITasks[]) => {
+          this.tasks = value.reverse();
+          this.editTaskActive = false;
+          },
         (error) => {
           console.log(error);
         },
@@ -33,29 +37,60 @@ export class TasksComponent implements OnInit {
       );
   }
 
-  public add(name: string): void {
-    name = name.trim();
-    const isTerminated = false;
-    if (!name) {
-      return;
-    }
-    this.dataTasksService.postTask({name, isTerminated} as unknown as ITasks)
-      .subscribe(task => {
-        this.getTasks();
-      });
-  }
-
   // tslint:disable-next-line:typedef
-  public onPressEnterPostTask(event: any) { // without type info
-    if (event.keyCode === 13) {
+  public postTask(event: any) { // without type info
+    if (event.key === 'Enter') {
       this.values = event.target.value;
-      this.add(this.values);
       event.target.value = '';
+      const name = this.values.trim();
+      const isTerminated = false;
+      if (!name) {
+        return;
+      }
+      this.dataTasksService.postTask({name, isTerminated} as unknown as ITasks)
+        .subscribe(() => {
+          this.getTasks();
+        });
     }
   }
 
-  public delete(task: number): void {
+  public deleteTask(task: number): void {
     this.dataTasksService.deleteTask(task)
+      .subscribe(
+        () => {
+          this.getTasks();
+          document.getElementById('deleteMessage').style.display = 'none';
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
+
+  public multiDeletion(): void {
+    const elem: any = document.getElementsByClassName('multiDeleted');
+    document.getElementById('deleteMessage').style.display = 'inline-block';
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < elem.length; i++) {
+      if (elem[i].checked === true) {
+        // tslint:disable-next-line:radix
+        this.deleteTask(parseInt(elem[i].value));
+      }
+    }
+  }
+
+  public editTask(task: ITasks): void {
+    this.editTaskActive = true;
+    this.editCurrentTask = task;
+  }
+
+  public taskFinished(task: ITasks): void {
+    if (task.isTerminated === false) {
+      task.isTerminated = true;
+    } else {
+      task.isTerminated = false;
+    }
+    this.dataTasksService.updateTask(task)
       .subscribe(
         () => {
           this.getTasks();
@@ -66,14 +101,16 @@ export class TasksComponent implements OnInit {
       );
   }
 
-  public multiDeleted(): void {
+  public multiFinish(): void {
     const elem: any = document.getElementsByClassName('multiDeleted');
+    document.getElementById('deleteMessage').style.display = 'inline-block';
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < elem.length; i++) {
       if (elem[i].checked === true) {
         // tslint:disable-next-line:radix
-        this.delete( parseInt(elem[i].value));
+        this.taskFinished();
       }
     }
   }
+
 }

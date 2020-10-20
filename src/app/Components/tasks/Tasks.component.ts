@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataTasksService} from '../../Services/data-tasks.service';
 import {ITasks} from '../../Interfaces/ITasks';
+import {stringify} from 'querystring';
 
 @Component({
   selector: 'app-tasks',
@@ -8,11 +9,12 @@ import {ITasks} from '../../Interfaces/ITasks';
   styleUrls: ['./Tasks.component.scss']
 })
 export class TasksComponent implements OnInit {
-  public tasks: ITasks[] ;
+  public tasks: ITasks[];
   public values = '';
   public test = true;
   public editCurrentTask: any;
   public editTaskActive: boolean;
+  private arrayTasks: any = [];
 
   constructor(private dataTasksService: DataTasksService) {
   }
@@ -27,7 +29,7 @@ export class TasksComponent implements OnInit {
         (value: ITasks[]) => {
           this.tasks = value.reverse();
           this.editTaskActive = false;
-          },
+        },
         (error) => {
           console.log(error);
         },
@@ -84,7 +86,7 @@ export class TasksComponent implements OnInit {
     this.editCurrentTask = task;
   }
 
-  public taskFinished(task: ITasks): void {
+  public taskIsTerminated(task: ITasks): void {
     if (task.isTerminated === false) {
       task.isTerminated = true;
     } else {
@@ -101,15 +103,37 @@ export class TasksComponent implements OnInit {
       );
   }
 
+  public taskIsFinish(task: ITasks): void {
+    task.isTerminated = true;
+    this.dataTasksService.updateTask(task)
+      .subscribe(
+        () => {
+          this.getTasks();
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
+
+  public selectTask(task: ITasks): void {
+    // tslint:disable-next-line:no-unused-expression
+
+    const found = this.arrayTasks.includes(task);
+    if (found) {
+      const elem = this.arrayTasks.indexOf(task);
+      console.log(this.arrayTasks.splice(elem, 1));
+    } else {
+      this.arrayTasks.push(task);
+    }
+
+    this.arrayTasks = [...new Set(this.arrayTasks)];
+    console.log(this.arrayTasks);
+  }
+
   public multiFinish(): void {
-    const elem: any = document.getElementsByClassName('multiDeleted');
-    document.getElementById('deleteMessage').style.display = 'inline-block';
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < elem.length; i++) {
-      if (elem[i].checked === true) {
-        // tslint:disable-next-line:radix
-        this.taskFinished();
-      }
+    for (let i = 0; i < this.arrayTasks.length; i++) {
+      this.taskIsFinish(this.arrayTasks[i]);
     }
   }
 

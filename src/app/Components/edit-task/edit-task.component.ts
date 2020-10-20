@@ -13,7 +13,7 @@ export class EditTaskComponent implements OnInit {
   @Output() updateCurrentTask = new EventEmitter();
   @Output() formEdit = new EventEmitter<boolean>();
   public flag = false;
-  formValues: ITasks[];
+  formValues: ITasks;
   reactForm: FormGroup;
 
   constructor(private dataTasksService: DataTasksService,
@@ -39,7 +39,7 @@ export class EditTaskComponent implements OnInit {
       );
   }
 
-  update(data: ITasks[]): void {
+  update(data: ITasks): void {
     this.dataTasksService.updateTask(data)
       .subscribe(
         () => {
@@ -71,6 +71,7 @@ export class EditTaskComponent implements OnInit {
       name: contactForm.name,
       isTerminated: contactForm.isTerminated
     };
+
     this.update(this.formValues);
   }
 }

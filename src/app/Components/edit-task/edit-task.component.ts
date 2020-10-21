@@ -16,7 +16,8 @@ export class EditTaskComponent implements OnInit {
 
   constructor(private dataTasksService: DataTasksService,
               private formBuilder: FormBuilder
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.createForm();

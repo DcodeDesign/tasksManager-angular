@@ -42,14 +42,47 @@ export class TimerTaskComponent implements OnInit {
   private iniTimer(): any {
     let id: number;
     id = this.timerCurrentTask.id;
-    console.log(id);
     this.dataTasksService.getTask(id)
       .subscribe(
         // @ts-ignore
         (value: ITasks) => {
-          console.log(value.duration);
           if (value.duration !== undefined) {
             this.task.duration = value.duration;
+            let array: Array<string>;
+            array = this.task.duration.split(':');
+            // tslint:disable-next-line:radix
+            this.heure = parseInt(array[0]);
+            // tslint:disable-next-line:radix
+            this.min = parseInt(array[1]);
+            // tslint:disable-next-line:radix
+            this.sec = parseInt(array[2]);
+            if (this.heure < 10) {
+              // @ts-ignore
+              this.IdHeure.innerText = '0' + (this.heure);
+            } else {
+              // @ts-ignore
+              this.IdHeure.innerText = this.heure;
+            }
+            if (this.min < 10) {
+              // @ts-ignore
+              this.IdMinute.innerText = '0' + this.min;
+            } else {
+              // @ts-ignore
+              this.IdMinute.innerText = this.min;
+            }
+            if (this.sec < 10) {
+              // @ts-ignore
+              this.IdSeconde.innerText = '0' + this.sec;
+            } else {
+              // @ts-ignore
+              this.IdSeconde.innerText = this.sec;
+            }
+          }
+          if (value.dateStart !== undefined) {
+            this.task.dateStart = value.dateStart;
+          }
+          if (value.dateEnd !== undefined) {
+            this.task.dateEnd = value.dateEnd ;
           }
         },
         (error) => {
@@ -76,24 +109,20 @@ export class TimerTaskComponent implements OnInit {
 
   private play(): any {
     this.task.dateStart = new Date();
-    console.log(this.task);
-    // this.update(this.task);
+    this.update(this.task);
   }
 
   private save(): any {
     this.task.dateEnd = new Date();
-    this.task.duration =   this.heure + ':' + this.min + ':' + this.sec ;
-    console.log(this.task);
-    // this.update(this.task);
+    this.task.duration = this.heure + ':' + this.min + ':' + this.sec;
+    this.update(this.task);
   }
 
   private restart(): any {
-    // this.update();
-    // this.dateStart;
-    // this.dateEnd;
-    // this.duration;
-    console.log(this.task);
-    // this.update(this.task);
+    this.task.dateStart = null;
+    this.task.dateEnd = null;
+    this.task.duration = null;
+    this.update(this.task);
   }
 
   private Close(): any {
@@ -101,10 +130,10 @@ export class TimerTaskComponent implements OnInit {
   }
 
   public chronometer(): void {
+    console.log(this.heure + ':' + this.min + ':' + this.sec);
     this.sec = this.sec + 1;
     let displaySec: any;
-    let displayHeure = '';
-
+    let displayHeure;
     if (this.sec < 10) {
       displaySec = '0' + this.sec;
     } else {
@@ -139,11 +168,9 @@ export class TimerTaskComponent implements OnInit {
   }
 
   public startChrono(): void {
-    setTimeout( () => {
       this.interval = setInterval(() => {
         this.chronometer();
       }, 1000);
-    }, 1000);
     /*
         const myNotification = new Notification('Start Chrono', {
             //body: 'Lorem Ipsum Dolor Sit Amet'

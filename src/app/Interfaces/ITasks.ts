@@ -4,8 +4,8 @@ export interface ITasks {
   '@type'?: string;
   id: number;
   name: string;
-  duration: string;
+  duration?: string;
   isTerminated: boolean;
-  dateStart: any;
-  dateEnd: any;
+  dateStart?: any;
+  dateEnd?: any;
 }

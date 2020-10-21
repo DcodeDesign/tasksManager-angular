@@ -1,3 +1,6 @@
+// @ts-ignore
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -6,12 +9,12 @@ import { AppComponent } from './app.component';
 import { TasksComponent } from './Components/tasks/Tasks.component';
 
 // IMPORTS
-import {HttpClientModule} from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditTaskComponent } from './Components/edit-task/edit-task.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimerTaskComponent } from './Components/timer-task/timer-task.component';
+
 
 @NgModule({
   declarations: [
@@ -23,10 +26,11 @@ import { TimerTaskComponent } from './Components/timer-task/timer-task.component
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule,
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

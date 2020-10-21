@@ -7,11 +7,12 @@
   </div>
 
   <div>
-    <label>Etat de la tâche : </label> <br>
-    <select name="isTerminated" class="validate" formControlName="isTerminated">
-      <option [selected]='editCurrentTask.isTerminated === true'>Tâche fini</option>
-      <option [selected]='editCurrentTask.isTerminated === false'>Tâche en cours</option>
-    </select>
+    <input name="isTerminated"
+           class="validate"
+           formControlName="isTerminated"
+           type="checkbox"
+           [checked]='editCurrentTask.isTerminated' />
+    <label> : Tâche terminée </label>
   </div>
   <button type="submit">Mettre à jours</button>
 </form>

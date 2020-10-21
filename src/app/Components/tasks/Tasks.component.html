@@ -1,9 +1,7 @@
-<h1>Tasks</h1>
-
-<div style="overflow: hidden;">
+<div>
   <input class="fieldPrimary" maxlength="255" (keydown)="actionPrimaryExecute($event);">
 
-  <div class="switch-field">
+  <div class="switch-fiel">
     <input type="radio"
            id="createTask"
            [checked]="actionCreate"
@@ -20,7 +18,9 @@
   </div>
 </div>
 
-<div style="position:fixed;top:0;">
+<br>
+
+<div>
   <button (click)="multiDeletion()">Delete Multiple</button>
   <button (click)="multiFinish()">Finish tasks</button>
   <p id="deleteMessage" style="display:none;">Supression en traitement...</p>

@@ -33,6 +33,14 @@ export class DataTasksService {
     };
   }
 
+  public getTask(id: number): Observable<ITasks> {
+    const url = `${this.apiUrlTasks}/${id}`;
+    return this.http.get<ITasks>(url).pipe(
+      tap(_ => console.log(`fetched tasks id=${id}`)),
+      catchError(this.handleError<ITasks>(`get Task id=${id}`))
+    );
+  }
+
   public getTasks(): Observable<ITasks[]> {
     return this.http.get<ITasks[]>(this.apiUrlTasks)
       .pipe(

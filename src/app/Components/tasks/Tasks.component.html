@@ -29,10 +29,11 @@
 <div>
   <div>
     <app-edit-task *ngIf="editTaskActive" [editCurrentTask]="editCurrentTask"
-                   (updateCurrentTask)="getTasks()"></app-edit-task>
+                   (updateCurrentTask)="getTasks()" ></app-edit-task>
   </div>
   <div>
-    <app-timer-task ></app-timer-task>
+    <app-timer-task  *ngIf="timerTaskActive" [timerCurrentTask]="timerCurrentTask"
+                     (updateCurrentTask)="getTasks()"></app-timer-task>
   </div>
   <ul>
     <li *ngFor="let task of tasks">
@@ -47,7 +48,7 @@
 
         <button (click)="taskIsTerminated(task)">Finish</button>
         <button (click)="editTask(task)">Edit</button>
-        <button>Timer</button>
+        <button (click)="timerDialog(task)">Timer</button>
         <button (click)="deleteTask(task.id)">Delete</button>
       </div>
     </li>

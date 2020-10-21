@@ -10,9 +10,10 @@ import {ITasks} from '../../Interfaces/ITasks';
 export class TasksComponent implements OnInit {
   public tasks: ITasks[];
   public values = '';
-  public test = true;
   public editCurrentTask: any;
+  public timerCurrentTask: any;
   public editTaskActive: boolean;
+  public timerTaskActive = false;
   public actionCreate = true;
   public actionSearch = false;
   private arrayTasks: any = [];
@@ -103,7 +104,7 @@ export class TasksComponent implements OnInit {
           },
           () => {
             console.log('completed !');
-        });
+          });
     }
   }
 
@@ -130,6 +131,11 @@ export class TasksComponent implements OnInit {
         this.deleteTask(parseInt(elem[i].value));
       }
     }
+  }
+
+  public timerDialog(task: ITasks): void {
+    this.timerCurrentTask = task;
+    this.timerTaskActive = true;
   }
 
   public editTask(task: ITasks): void {

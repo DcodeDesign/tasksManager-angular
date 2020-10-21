@@ -11,7 +11,6 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 export class EditTaskComponent implements OnInit {
   @Input() editCurrentTask: ITasks;
   @Output() updateCurrentTask = new EventEmitter();
-  @Output() formEdit = new EventEmitter<boolean>();
   formValues: ITasks;
   reactForm: FormGroup;
 
@@ -28,7 +27,7 @@ export class EditTaskComponent implements OnInit {
     this.dataTasksService.getTasks()
       .subscribe(
         // @ts-ignore
-        (value: ITasks) => this.editCurrentTask = value.reverse(),
+        (value: ITasks) => this.editCurrentTask = value,
         (error) => {
           console.log(error);
         },
@@ -51,17 +50,6 @@ export class EditTaskComponent implements OnInit {
       );
   }
 
-  public createForm(): any {
-    this.reactForm = this.formBuilder.group({
-      // @ts-ignore
-      id: this.editCurrentTask.id,
-      // @ts-ignore
-      name: [this.editCurrentTask.name, Validators.compose([Validators.required, Validators.minLength(5)])],
-      // @ts-ignore
-      isTerminated: this.editCurrentTask.isTerminated
-    });
-  }
-
   public onSubmit(): any {
     const contactForm = this.reactForm.value;
     this.formValues = {
@@ -72,5 +60,16 @@ export class EditTaskComponent implements OnInit {
     };
 
     this.update(this.formValues);
+  }
+
+  public createForm(): any {
+    this.reactForm = this.formBuilder.group({
+      // @ts-ignore
+      id: this.editCurrentTask.id,
+      // @ts-ignore
+      name: [this.editCurrentTask.name, Validators.compose([Validators.required, Validators.minLength(5)])],
+      // @ts-ignore
+      isTerminated: this.editCurrentTask.isTerminated
+    });
   }
 }

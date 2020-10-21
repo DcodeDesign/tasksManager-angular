@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DataTasksService} from '../../Services/data-tasks.service';
 import {ITasks} from '../../Interfaces/ITasks';
-import {stringify} from 'querystring';
 
 @Component({
   selector: 'app-tasks',
@@ -14,6 +13,8 @@ export class TasksComponent implements OnInit {
   public test = true;
   public editCurrentTask: any;
   public editTaskActive: boolean;
+  public actionCreate = true;
+  public actionSearch = false;
   private arrayTasks: any = [];
 
   constructor(private dataTasksService: DataTasksService) {
@@ -27,20 +28,47 @@ export class TasksComponent implements OnInit {
     this.dataTasksService.getTasks()
       .subscribe(
         (value: ITasks[]) => {
-          this.tasks = value.reverse();
+          this.tasks = value;
           this.editTaskActive = false;
         },
         (error) => {
           console.log(error);
         },
         () => {
-          console.log('completed !');
+          console.log('Get task is completed !');
         }
       );
   }
 
   // tslint:disable-next-line:typedef
-  public postTask(event: any) { // without type info
+  public actionPrimary(e) {
+    const valueActionPrimary = e.target.value;
+    console.log(valueActionPrimary);
+    if (valueActionPrimary === 'createTask') {
+      this.getTasks();
+      this.actionCreate = true;
+      this.actionSearch = false;
+    }
+
+    if (valueActionPrimary === 'searchTask') {
+      this.getTasks();
+      this.actionCreate = false;
+      this.actionSearch = true;
+    }
+  }
+
+
+  public actionPrimaryExecute(event: any): void {
+    if (this.actionCreate) {
+      this.postTask(event);
+    }
+
+    if (this.actionSearch) {
+      this.saerchTask(event);
+    }
+  }
+
+  private postTask(event: any): void {
     if (event.key === 'Enter') {
       this.values = event.target.value;
       event.target.value = '';
@@ -52,6 +80,29 @@ export class TasksComponent implements OnInit {
       this.dataTasksService.postTask({name, isTerminated} as unknown as ITasks)
         .subscribe(() => {
           this.getTasks();
+        });
+    }
+  }
+
+  private saerchTask(event: any): void {
+    if (event.key === 'Enter') {
+      this.values = event.target.value;
+      event.target.value = '';
+      const name = this.values.trim();
+
+      if (!name) {
+        return;
+      }
+
+      this.dataTasksService.searchTask(this.values)
+        .subscribe(
+          // @ts-ignore
+          (value: ITasks[]) => this.tasks = value,
+          (error) => {
+            console.log(error);
+          },
+          () => {
+            console.log('completed !');
         });
     }
   }
@@ -87,11 +138,7 @@ export class TasksComponent implements OnInit {
   }
 
   public taskIsTerminated(task: ITasks): void {
-    if (task.isTerminated === false) {
-      task.isTerminated = true;
-    } else {
-      task.isTerminated = false;
-    }
+    task.isTerminated = task.isTerminated === false;
     this.dataTasksService.updateTask(task)
       .subscribe(
         () => {
@@ -117,8 +164,6 @@ export class TasksComponent implements OnInit {
   }
 
   public selectTask(task: ITasks): void {
-    // tslint:disable-next-line:no-unused-expression
-
     const found = this.arrayTasks.includes(task);
     if (found) {
       const elem = this.arrayTasks.indexOf(task);
@@ -126,12 +171,12 @@ export class TasksComponent implements OnInit {
     } else {
       this.arrayTasks.push(task);
     }
-
     this.arrayTasks = [...new Set(this.arrayTasks)];
     console.log(this.arrayTasks);
   }
 
   public multiFinish(): void {
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.arrayTasks.length; i++) {
       this.taskIsFinish(this.arrayTasks[i]);
     }

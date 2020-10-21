@@ -12,7 +12,6 @@ export class EditTaskComponent implements OnInit {
   @Input() editCurrentTask: ITasks;
   @Output() updateCurrentTask = new EventEmitter();
   @Output() formEdit = new EventEmitter<boolean>();
-  public flag = false;
   formValues: ITasks;
   reactForm: FormGroup;
 

@@ -11,12 +11,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditTaskComponent } from './Components/edit-task/edit-task.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { TimerTaskComponent } from './Components/timer-task/timer-task.component';
 
 @NgModule({
   declarations: [
     TasksComponent,
     AppComponent,
-    EditTaskComponent
+    EditTaskComponent,
+    TimerTaskComponent
   ],
   imports: [
     BrowserAnimationsModule,

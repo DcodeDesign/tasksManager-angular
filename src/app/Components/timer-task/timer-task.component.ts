@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, OnInit, Component, EventEmitter, Input, Output, OnDestroy} from '@angular/core';
 import {ITasks} from '../../Interfaces/ITasks';
 import {DataTasksService} from '../../Services/data-tasks.service';
 
@@ -7,36 +7,48 @@ import {DataTasksService} from '../../Services/data-tasks.service';
   templateUrl: './timer-task.component.html',
   styleUrls: ['./timer-task.component.scss']
 })
-export class TimerTaskComponent implements OnInit {
+export class TimerTaskComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() timerCurrentTask: ITasks;
   @Output() updateCurrentTask = new EventEmitter();
-  public IdSeconde: HTMLElement;
-  public IdMinute: HTMLElement;
-  public IdHeure: HTMLElement;
-  public btnStart: HTMLElement;
-  public btnStop: HTMLElement;
-  public btnReset: HTMLElement;
+  @Output() closeCurrentTask = new EventEmitter();
+  public task: ITasks;
+  public IdSeconde: HTMLCollectionOf<Element>;
+  public IdMinute: HTMLCollectionOf<Element>;
+  public IdHeure: HTMLCollectionOf<Element>;
+  public btnStart: HTMLCollectionOf<Element>;
+  public btnStop: HTMLCollectionOf<Element>;
+  public btnReset: HTMLCollectionOf<Element>;
+  private btnClose: HTMLCollectionOf<Element>;
+  private IdTimer: HTMLElement;
   public interval = null;
   public sec = 0;
   public min = 0;
   public heure = 0;
-  public task: ITasks;
+  private closeDialogClose = false;
 
   constructor(private dataTasksService: DataTasksService) {
   }
 
   ngOnInit(): void {
-    this.IdSeconde = document.getElementById('seconde');
-    this.IdMinute = document.getElementById('minute');
-    this.IdHeure = document.getElementById('heure');
-    this.btnStart = document.getElementById('start');
-    this.btnStop = document.getElementById('stop');
-    this.btnReset = document.getElementById('reset');
     this.task = this.timerCurrentTask;
+  }
+
+  ngAfterViewInit(): void {
+    this.IdTimer = document.getElementById(`${this.task.id}`);
+    console.log(this.IdTimer);
+    this.IdSeconde = this.IdTimer.getElementsByClassName('seconde');
+    this.IdMinute = this.IdTimer.getElementsByClassName('minute');
+    this.IdHeure = this.IdTimer.getElementsByClassName('heure');
+    this.btnStart = this.IdTimer.getElementsByClassName('start');
+    this.btnStop = this.IdTimer.getElementsByClassName('stop');
+    this.btnReset = this.IdTimer.getElementsByClassName('reset');
+    this.btnClose = this.IdTimer.getElementsByClassName('close');
     this.iniTimer();
+    this.btnStop[0].setAttribute('disabled', String(true));
     this.clickStartChrono();
     this.clickStopChrono();
     this.clickResetChrono();
+    this.clickCloseChrono();
   }
 
   private iniTimer(): any {
@@ -44,45 +56,35 @@ export class TimerTaskComponent implements OnInit {
     id = this.timerCurrentTask.id;
     this.dataTasksService.getTask(id)
       .subscribe(
-        // @ts-ignore
         (value: ITasks) => {
           if (value.duration !== undefined) {
             this.task.duration = value.duration;
             let array: Array<string>;
             array = this.task.duration.split(':');
-            // tslint:disable-next-line:radix
-            this.heure = parseInt(array[0]);
-            // tslint:disable-next-line:radix
-            this.min = parseInt(array[1]);
-            // tslint:disable-next-line:radix
-            this.sec = parseInt(array[2]);
+            this.heure = parseInt(array[0], null);
+            this.min = parseInt(array[1], null);
+            this.sec = parseInt(array[2], null);
             if (this.heure < 10) {
-              // @ts-ignore
-              this.IdHeure.innerText = '0' + (this.heure);
+              this.IdHeure[0].innerHTML = '0' + this.heure.toString();
             } else {
-              // @ts-ignore
-              this.IdHeure.innerText = this.heure;
+              this.IdHeure[0].innerHTML = this.heure.toString();
             }
             if (this.min < 10) {
-              // @ts-ignore
-              this.IdMinute.innerText = '0' + this.min;
+              this.IdMinute[0].innerHTML = '0' + this.min.toString();
             } else {
-              // @ts-ignore
-              this.IdMinute.innerText = this.min;
+              this.IdMinute[0].innerHTML = this.min.toString();
             }
             if (this.sec < 10) {
-              // @ts-ignore
-              this.IdSeconde.innerText = '0' + this.sec;
+              this.IdSeconde[0].innerHTML = '0' + this.sec.toString();
             } else {
-              // @ts-ignore
-              this.IdSeconde.innerText = this.sec;
+              this.IdSeconde[0].innerHTML = this.sec.toString();
             }
           }
           if (value.dateStart !== undefined) {
             this.task.dateStart = value.dateStart;
           }
           if (value.dateEnd !== undefined) {
-            this.task.dateEnd = value.dateEnd ;
+            this.task.dateEnd = value.dateEnd;
           }
         },
         (error) => {
@@ -94,12 +96,13 @@ export class TimerTaskComponent implements OnInit {
       );
   }
 
-  update(data: ITasks): void {
+  private update(data: ITasks): void {
     this.dataTasksService.updateTask(data)
       .subscribe(
         () => {
-          this.getTasks();
-          this.updateCurrentTask.emit();
+          if (this.closeDialogClose) {
+            this.closeCurrentTask.emit(this.task);
+          }
         },
         error => {
           console.log(error);
@@ -113,9 +116,16 @@ export class TimerTaskComponent implements OnInit {
   }
 
   private save(): any {
-    this.task.dateEnd = new Date();
-    this.task.duration = this.heure + ':' + this.min + ':' + this.sec;
-    this.update(this.task);
+    console.log(this.sec);
+    if (this.sec !== 0) {
+      this.task.dateEnd = new Date();
+      this.task.duration = this.heure + ':' + this.min + ':' + this.sec;
+      this.update(this.task);
+    } else {
+      if (this.closeDialogClose) {
+        this.closeCurrentTask.emit(this.task);
+      }
+    }
   }
 
   private restart(): any {
@@ -125,52 +135,45 @@ export class TimerTaskComponent implements OnInit {
     this.update(this.task);
   }
 
-  private Close(): any {
-    this.save();
-  }
-
   public chronometer(): void {
-    console.log(this.heure + ':' + this.min + ':' + this.sec);
+    let displaySec: string;
+    let displayMin: string;
+    let displayHeure: string;
     this.sec = this.sec + 1;
-    let displaySec: any;
-    let displayHeure;
     if (this.sec < 10) {
       displaySec = '0' + this.sec;
     } else {
-      displaySec = this.sec;
+      displaySec = this.sec.toString();
     }
-    this.IdSeconde.innerText = displaySec;
+    this.IdSeconde[0].innerHTML = displaySec;
 
     if (this.sec === 59) {
-      // tslint:disable-next-line:no-shadowed-variable
-      let displayMin: any;
       this.sec = 0;
       this.min = this.min + 1;
       if (this.min < 10) {
         displayMin = '0' + this.min;
       } else {
-        displayMin = this.min;
+        displayMin = this.min.toString();
       }
-      this.IdMinute.innerText = displayMin;
+      this.IdMinute[0].innerHTML = displayMin;
     }
     if (this.min === 59) {
       this.sec = 0;
       this.min = 0;
       this.heure = this.heure + 1;
       if (this.heure < 10) {
-        displayHeure = '0' + this.heure;
+        displayHeure = '0' + this.heure.toString();
       } else {
-        // @ts-ignore
-        displayHeure = toString(this.heure);
+        displayHeure = this.heure.toString();
       }
-      this.IdHeure.innerText = displayHeure;
+      this.IdHeure[0].innerHTML = displayHeure;
     }
   }
 
   public startChrono(): void {
-      this.interval = setInterval(() => {
-        this.chronometer();
-      }, 1000);
+    this.interval = setInterval(() => {
+      this.chronometer();
+    }, 1000);
     /*
         const myNotification = new Notification('Start Chrono', {
             //body: 'Lorem Ipsum Dolor Sit Amet'
@@ -194,51 +197,49 @@ export class TimerTaskComponent implements OnInit {
   }
 
   public clickStartChrono(): void {
-    this.btnStart.addEventListener('click', () => {
+      this.btnStart[0].addEventListener('click', () => {
+      this.btnStart[0].setAttribute('disabled', String(true));
+      this.btnStop[0].removeAttribute('disabled');
       this.startChrono();
       this.play();
-      // @ts-ignore
-      this.btnStart.disabled = true;
     });
   }
 
   public clickStopChrono(): void {
-    this.btnStop.addEventListener('click', () => {
+    this.btnStop[0].addEventListener('click', () => {
       this.stopChrono();
       this.save();
-      // @ts-ignore
-      this.btnStart.disabled = false;
+      this.btnStart[0].removeAttribute('disabled');
+      this.btnStop[0].setAttribute('disabled', String(true));
     });
-
   }
 
   public resetChrono(): void {
     this.sec = 0;
     this.min = 0;
     this.heure = 0;
-    this.IdSeconde.innerText = '00';
-    this.IdMinute.innerText = '00';
-    this.IdHeure.innerText = '00';
+    (this.IdSeconde[0] as HTMLElement).innerText = '00';
+    (this.IdMinute[0] as HTMLElement).innerText = '00';
+    (this.IdHeure[0] as HTMLElement).innerText = '00';
+    this.restart();
   }
 
   public clickResetChrono(): void {
-    this.btnReset.addEventListener('click', () => {
+    this.btnReset[0].addEventListener('click', () => {
       this.resetChrono();
     });
   }
 
-  public getTasks(): void {
-    // @ts-ignore
-    this.dataTasksService.getTasks()
-      .subscribe(
-        // @ts-ignore
-        (value: ITasks) => this.editCurrentTask = value,
-        (error) => {
-          console.log(error);
-        },
-        () => {
-          console.log('completed !');
-        }
-      );
+  public clickCloseChrono(): void {
+    this.btnClose[0].addEventListener('click', () => {
+      this.stopChrono();
+      this.closeDialogClose = true;
+      this.save();
+    });
+  }
+
+  ngOnDestroy(): void {
+    console.log('close');
+    clearInterval(this.interval);
   }
 }

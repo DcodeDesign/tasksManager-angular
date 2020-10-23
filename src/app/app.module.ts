@@ -1,20 +1,17 @@
-// @ts-ignore
-import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// COMPONENTS
 import { TasksComponent } from './Components/tasks/Tasks.component';
 
-// IMPORTS
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditTaskComponent } from './Components/edit-task/edit-task.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimerTaskComponent } from './Components/timer-task/timer-task.component';
-
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -29,8 +26,8 @@ import { TimerTaskComponent } from './Components/timer-task/timer-task.component
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

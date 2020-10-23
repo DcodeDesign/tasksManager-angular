@@ -9,14 +9,15 @@ import {ITasks} from '../../Interfaces/ITasks';
 })
 export class TasksComponent implements OnInit {
   public tasks: ITasks[];
-  public values = '';
+  private arrayTasks: Array<ITasks> = [];
+  public arrayOpenTimer: Array<ITasks> = [];
+  public timerTaskActive: ITasks;
   public editCurrentTask: any;
   public timerCurrentTask: any;
-  public editTaskActive: boolean;
-  public timerTaskActive = false;
   public actionCreate = true;
   public actionSearch = false;
-  private arrayTasks: any = [];
+  public editTaskActive: boolean;
+  public values = '';
 
   constructor(private dataTasksService: DataTasksService) {
   }
@@ -108,12 +109,14 @@ export class TasksComponent implements OnInit {
     }
   }
 
-  public deleteTask(task: number): void {
-    this.dataTasksService.deleteTask(task)
+  public deleteTask(task: ITasks): void {
+    this.dataTasksService.deleteTask(task.id)
       .subscribe(
         () => {
+          if (this.timerIsOpen(task)) {
+            this.selectTimers(task);
+          }
           this.getTasks();
-          document.getElementById('deleteMessage').style.display = 'none';
         },
         error => {
           console.log(error);
@@ -122,25 +125,19 @@ export class TasksComponent implements OnInit {
   }
 
   public multiDeletion(): void {
-    const elem: any = document.getElementsByClassName('multiDeleted');
-    document.getElementById('deleteMessage').style.display = 'inline-block';
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < elem.length; i++) {
-      if (elem[i].checked === true) {
-        // tslint:disable-next-line:radix
-        this.deleteTask(parseInt(elem[i].value));
-      }
+    for (let i = 0; i < this.arrayTasks.length; i++) {
+      this.deleteTask(this.arrayTasks[i]);
     }
-  }
-
-  public timerDialog(task: ITasks): void {
-    this.timerCurrentTask = task;
-    this.timerTaskActive = true;
   }
 
   public editTask(task: ITasks): void {
     this.editTaskActive = true;
     this.editCurrentTask = task;
+    this.getId(task);
+  }
+
+  public getId(task: ITasks): number {
+    return task.id;
   }
 
   public taskIsTerminated(task: ITasks): void {
@@ -182,10 +179,40 @@ export class TasksComponent implements OnInit {
   }
 
   public multiFinish(): void {
-    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.arrayTasks.length; i++) {
       this.taskIsFinish(this.arrayTasks[i]);
     }
   }
 
+  public timerDialog(task: ITasks): void {
+    this.selectTimers(task);
+    this.timerCurrentTask = task;
+    this.timerTaskActive = task;
+    console.log('Timer ouvert : ' + this.timerCurrentTask.id);
+  }
+
+  public selectTimers(task: ITasks): void {
+    const foundTimer = this.arrayOpenTimer.includes(task);
+    if (foundTimer) {
+      const elem = this.arrayOpenTimer.indexOf(task);
+      this.arrayOpenTimer.splice(elem, 1);
+    } else {
+      this.arrayOpenTimer.push(task);
+    }
+    this.arrayOpenTimer = [...new Set(this.arrayOpenTimer)];
+    console.log(this.arrayOpenTimer);
+  }
+
+  public timerIsOpen(task: ITasks): boolean {
+    const foundTimer = this.arrayOpenTimer.includes(task);
+    if (foundTimer) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public closeTimer(task: ITasks): void {
+    this.timerIsOpen(task);
+  }
 }

@@ -12,13 +12,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimerTaskComponent } from './Components/timer-task/timer-task.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ToggleTaskItemMenuDirective } from './Directives/toggle-task-item-menu.directive';
 
 @NgModule({
   declarations: [
     TasksComponent,
     AppComponent,
     EditTaskComponent,
-    TimerTaskComponent
+    TimerTaskComponent,
+    ToggleTaskItemMenuDirective
   ],
   imports: [
     BrowserAnimationsModule,

@@ -51,7 +51,8 @@ export class EditTaskComponent implements OnInit {
       );
   }
 
-  public onSubmit(): any {
+  public onSubmit(e): any {
+    e.stopPropagation();
     const contactForm = this.reactForm.value;
     this.formValues = {
       // @ts-ignore
@@ -65,11 +66,8 @@ export class EditTaskComponent implements OnInit {
 
   public createForm(): any {
     this.reactForm = this.formBuilder.group({
-      // @ts-ignore
       id: this.editCurrentTask.id,
-      // @ts-ignore
       name: [this.editCurrentTask.name, Validators.compose([Validators.required, Validators.minLength(5)])],
-      // @ts-ignore
       isTerminated: this.editCurrentTask.isTerminated
     });
   }

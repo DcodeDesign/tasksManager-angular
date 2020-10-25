@@ -138,6 +138,10 @@
                                 <a href="#actionSearch">actionSearch</a>
                             </li>
                             <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#arrayOpenTimer">arrayOpenTimer</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Private</span>
                                 <a href="#arrayTasks">arrayTasks</a>
                             </li>
@@ -187,11 +191,19 @@
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
+                                <a href="#closeTimer">closeTimer</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#deleteTask">deleteTask</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#editTask">editTask</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getId">getId</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -222,6 +234,10 @@
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
+                                <a href="#selectTimers">selectTimers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#taskIsFinish">taskIsFinish</a>
                             </li>
                             <li>
@@ -231,6 +247,10 @@
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#timerDialog">timerDialog</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#timerIsOpen">timerIsOpen</a>
                             </li>
                         </ul>
                     </td>
@@ -255,7 +275,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -326,8 +346,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="45"
-                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:45</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:46</a></div>
                 </td>
             </tr>
 
@@ -394,8 +414,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="62"
-                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:62</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:63</a></div>
                 </td>
             </tr>
 
@@ -446,100 +466,28 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="deleteTask"></a>
+                    <a name="closeTimer"></a>
                     <span class="name">
                         <b>
                             <span class="modifier">Public</span>
-                            deleteTask
+                            closeTimer
                         </b>
-                        <a href="#deleteTask"><span class="icon ion-ios-link"></span></a>
+                        <a href="#closeTimer"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>deleteTask(task: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    <code>closeTimer(task: <a href="../interfaces/ITasks.html">ITasks</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="111"
-                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:111</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>task</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="editTask"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            editTask
-                        </b>
-                        <a href="#editTask"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>editTask(task: <a href="../interfaces/ITasks.html">ITasks</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="141"
-                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:141</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="216"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:216</a></div>
                 </td>
             </tr>
 
@@ -590,6 +538,222 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="deleteTask"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            deleteTask
+                        </b>
+                        <a href="#deleteTask"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteTask(task: <a href="../interfaces/ITasks.html">ITasks</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="112"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:112</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>task</td>
+                                    <td>
+                                                <code><a href="../interfaces/ITasks.html" target="_self" >ITasks</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editTask"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            editTask
+                        </b>
+                        <a href="#editTask"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>editTask(task: <a href="../interfaces/ITasks.html">ITasks</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="134"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:134</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>task</td>
+                                    <td>
+                                                <code><a href="../interfaces/ITasks.html" target="_self" >ITasks</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getId"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getId
+                        </b>
+                        <a href="#getId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getId(task: <a href="../interfaces/ITasks.html">ITasks</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="140"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:140</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>task</td>
+                                    <td>
+                                                <code><a href="../interfaces/ITasks.html" target="_self" >ITasks</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getTasks"></a>
                     <span class="name">
                         <b>
@@ -610,8 +774,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:29</a></div>
                 </td>
             </tr>
 
@@ -651,8 +815,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="124"
-                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:124</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="127"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:127</a></div>
                 </td>
             </tr>
 
@@ -692,8 +856,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="184"
-                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:184</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="182"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:182</a></div>
                 </td>
             </tr>
 
@@ -731,8 +895,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:25</a></div>
                 </td>
             </tr>
 
@@ -772,8 +936,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="72"
-                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:72</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="73"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:73</a></div>
                 </td>
             </tr>
 
@@ -844,8 +1008,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="88"
-                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:88</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="89"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:89</a></div>
                 </td>
             </tr>
 
@@ -916,8 +1080,80 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="172"
-                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:172</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="170"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:170</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>task</td>
+                                    <td>
+                                                <code><a href="../interfaces/ITasks.html" target="_self" >ITasks</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectTimers"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            selectTimers
+                        </b>
+                        <a href="#selectTimers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>selectTimers(task: <a href="../interfaces/ITasks.html">ITasks</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="195"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:195</a></div>
                 </td>
             </tr>
 
@@ -988,8 +1224,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="159"
-                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:159</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="157"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:157</a></div>
                 </td>
             </tr>
 
@@ -1060,8 +1296,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="146"
-                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:146</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="144"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:144</a></div>
                 </td>
             </tr>
 
@@ -1132,8 +1368,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="136"
-                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:136</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="188"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:188</a></div>
                 </td>
             </tr>
 
@@ -1171,6 +1407,78 @@
                     </div>
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="timerIsOpen"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            timerIsOpen
+                        </b>
+                        <a href="#timerIsOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>timerIsOpen(task: <a href="../interfaces/ITasks.html">ITasks</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="207"
+                            class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:207</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>task</td>
+                                    <td>
+                                                <code><a href="../interfaces/ITasks.html" target="_self" >ITasks</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                     </div>
                     <div class="io-description">
@@ -1244,6 +1552,39 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="arrayOpenTimer"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            arrayOpenTimer</b>
+                            <a href="#arrayOpenTimer"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/ITasks.html" target="_self" >Array&lt;ITasks&gt;</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:13</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="arrayTasks"></a>
                         <span class="name">
                             <b>
@@ -1255,7 +1596,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <i>Type : </i>        <code><a href="../interfaces/ITasks.html" target="_self" >Array&lt;ITasks&gt;</a></code>
 
                         </td>
                     </tr>
@@ -1266,7 +1607,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:12</a></div>
                             </td>
                         </tr>
 
@@ -1294,7 +1635,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -1322,7 +1663,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:19</a></div>
                             </td>
                         </tr>
 
@@ -1378,7 +1719,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -1400,12 +1741,13 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>false</code>
+                            <i>Type : </i>        <code><a href="../interfaces/ITasks.html" target="_self" >ITasks</a></code>
+
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -1438,7 +1780,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/Components/tasks/Tasks.component.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -1462,14 +1804,15 @@ import {ITasks} from &#x27;../../Interfaces/ITasks&#x27;;
 })
 export class TasksComponent implements OnInit {
   public tasks: ITasks[];
-  public values &#x3D; &#x27;&#x27;;
+  private arrayTasks: Array&lt;ITasks&gt; &#x3D; [];
+  public arrayOpenTimer: Array&lt;ITasks&gt; &#x3D; [];
+  public timerTaskActive: ITasks;
   public editCurrentTask: any;
   public timerCurrentTask: any;
-  public editTaskActive: boolean;
-  public timerTaskActive &#x3D; false;
   public actionCreate &#x3D; true;
   public actionSearch &#x3D; false;
-  private arrayTasks: any &#x3D; [];
+  public editTaskActive: boolean;
+  public values &#x3D; &#x27;&#x27;;
 
   constructor(private dataTasksService: DataTasksService) {
   }
@@ -1561,12 +1904,14 @@ export class TasksComponent implements OnInit {
     }
   }
 
-  public deleteTask(task: number): void {
-    this.dataTasksService.deleteTask(task)
+  public deleteTask(task: ITasks): void {
+    this.dataTasksService.deleteTask(task.id)
       .subscribe(
         () &#x3D;&gt; {
+          if (this.timerIsOpen(task)) {
+            this.selectTimers(task);
+          }
           this.getTasks();
-          document.getElementById(&#x27;deleteMessage&#x27;).style.display &#x3D; &#x27;none&#x27;;
         },
         error &#x3D;&gt; {
           console.log(error);
@@ -1575,25 +1920,20 @@ export class TasksComponent implements OnInit {
   }
 
   public multiDeletion(): void {
-    const elem: any &#x3D; document.getElementsByClassName(&#x27;multiDeleted&#x27;);
-    document.getElementById(&#x27;deleteMessage&#x27;).style.display &#x3D; &#x27;inline-block&#x27;;
     // tslint:disable-next-line:prefer-for-of
-    for (let i &#x3D; 0; i &lt; elem.length; i++) {
-      if (elem[i].checked &#x3D;&#x3D;&#x3D; true) {
-        // tslint:disable-next-line:radix
-        this.deleteTask(parseInt(elem[i].value));
-      }
+    for (let i &#x3D; 0; i &lt; this.arrayTasks.length; i++) {
+      this.deleteTask(this.arrayTasks[i]);
     }
-  }
-
-  public timerDialog(task: ITasks): void {
-    this.timerCurrentTask &#x3D; task;
-    this.timerTaskActive &#x3D; true;
   }
 
   public editTask(task: ITasks): void {
     this.editTaskActive &#x3D; true;
     this.editCurrentTask &#x3D; task;
+    this.getId(task);
+  }
+
+  public getId(task: ITasks): number {
+    return task.id;
   }
 
   public taskIsTerminated(task: ITasks): void {
@@ -1635,12 +1975,42 @@ export class TasksComponent implements OnInit {
   }
 
   public multiFinish(): void {
-    // tslint:disable-next-line:prefer-for-of
     for (let i &#x3D; 0; i &lt; this.arrayTasks.length; i++) {
       this.taskIsFinish(this.arrayTasks[i]);
     }
   }
 
+  public timerDialog(task: ITasks): void {
+    this.selectTimers(task);
+    this.timerCurrentTask &#x3D; task;
+    this.timerTaskActive &#x3D; task;
+    console.log(&#x27;Timer ouvert : &#x27; + this.timerCurrentTask.id);
+  }
+
+  public selectTimers(task: ITasks): void {
+    const foundTimer &#x3D; this.arrayOpenTimer.includes(task);
+    if (foundTimer) {
+      const elem &#x3D; this.arrayOpenTimer.indexOf(task);
+      this.arrayOpenTimer.splice(elem, 1);
+    } else {
+      this.arrayOpenTimer.push(task);
+    }
+    this.arrayOpenTimer &#x3D; [...new Set(this.arrayOpenTimer)];
+    console.log(this.arrayOpenTimer);
+  }
+
+  public timerIsOpen(task: ITasks): boolean {
+    const foundTimer &#x3D; this.arrayOpenTimer.includes(task);
+    if (foundTimer) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public closeTimer(task: ITasks): void {
+    this.timerIsOpen(task);
+  }
 }
 </code></pre>
     </div>
@@ -1675,14 +2045,11 @@ export class TasksComponent implements OnInit {
 &lt;/div&gt;
 
 &lt;div&gt;
-  &lt;div&gt;
-    &lt;app-edit-task *ngIf&#x3D;&quot;editTaskActive&quot; [editCurrentTask]&#x3D;&quot;editCurrentTask&quot;
-                   (updateCurrentTask)&#x3D;&quot;getTasks()&quot; &gt;&lt;/app-edit-task&gt;
+  &lt;div *ngFor&#x3D;&quot;let timer of arrayOpenTimer&quot;&gt;
+    &lt;app-timer-task *ngIf&#x3D;&quot;timerIsOpen(timer)&quot; [timerCurrentTask]&#x3D;&quot;timer&quot;
+                    (updateCurrentTask)&#x3D;&quot;getTasks();&quot; (closeCurrentTask)&#x3D;&quot;selectTimers(timer);&quot;&gt;&lt;/app-timer-task&gt;
   &lt;/div&gt;
-  &lt;div&gt;
-    &lt;app-timer-task  *ngIf&#x3D;&quot;timerTaskActive&quot; [timerCurrentTask]&#x3D;&quot;timerCurrentTask&quot;
-                     (updateCurrentTask)&#x3D;&quot;getTasks()&quot;&gt;&lt;/app-timer-task&gt;
-  &lt;/div&gt;
+
   &lt;ul&gt;
     &lt;li *ngFor&#x3D;&quot;let task of tasks&quot;&gt;
       &lt;div&gt;
@@ -1697,7 +2064,11 @@ export class TasksComponent implements OnInit {
         &lt;button (click)&#x3D;&quot;taskIsTerminated(task)&quot;&gt;Finish&lt;/button&gt;
         &lt;button (click)&#x3D;&quot;editTask(task)&quot;&gt;Edit&lt;/button&gt;
         &lt;button (click)&#x3D;&quot;timerDialog(task)&quot;&gt;Timer&lt;/button&gt;
-        &lt;button (click)&#x3D;&quot;deleteTask(task.id)&quot;&gt;Delete&lt;/button&gt;
+        &lt;button (click)&#x3D;&quot;deleteTask(task)&quot;&gt;Delete&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;app-edit-task [id]&#x3D;&quot;getId(task)&quot; *ngIf&#x3D;&quot;editTaskActive &amp;&amp; (task.id &#x3D;&#x3D;&#x3D; editCurrentTask.id)&quot; [editCurrentTask]&#x3D;&quot;editCurrentTask&quot;
+                       (updateCurrentTask)&#x3D;&quot;getTasks()&quot; &gt;&lt;/app-edit-task&gt;
       &lt;/div&gt;
     &lt;/li&gt;
   &lt;/ul&gt;
@@ -1801,9 +2172,9 @@ h2 {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div>  <input class="fieldPrimary" maxlength="255" (keydown)="actionPrimaryExecute($event);">  <div class="switch-fiel">    <input type="radio"           id="createTask"           [checked]="actionCreate"           (click)="actionPrimary($event)"           value="createTask">    <label for="createTask">Create</label>    <input type="radio"           id="searchTask"           [checked]="actionSearch"           (click)="actionPrimary($event)"           value="searchTask">    <label for="searchTask">Search</label>  </div></div><br><div>  <button (click)="multiDeletion()">Delete Multiple</button>  <button (click)="multiFinish()">Finish tasks</button>  <p id="deleteMessage" style="display:none;">Supression en traitement...</p></div><div>  <div>    <app-edit-task *ngIf="editTaskActive" [editCurrentTask]="editCurrentTask"                   (updateCurrentTask)="getTasks()" ></app-edit-task>  </div>  <div>    <app-timer-task  *ngIf="timerTaskActive" [timerCurrentTask]="timerCurrentTask"                     (updateCurrentTask)="getTasks()"></app-timer-task>  </div>  <ul>    <li *ngFor="let task of tasks">      <div>        <input type="checkbox" class="multiDeleted" id="taskId{{ task.id }}" name="{{ task.name }}"               value="{{ task.id }}"               (click)="selectTask(task)">        - Name : {{ task.name }}        - Id : {{ task.id }}        - Finish : {{ task.isTerminated }}        - Durée : {{ task.duration }}        <button (click)="taskIsTerminated(task)">Finish</button>        <button (click)="editTask(task)">Edit</button>        <button (click)="timerDialog(task)">Timer</button>        <button (click)="deleteTask(task.id)">Delete</button>      </div>    </li>  </ul></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div>  <input class="fieldPrimary" maxlength="255" (keydown)="actionPrimaryExecute($event);">  <div class="switch-fiel">    <input type="radio"           id="createTask"           [checked]="actionCreate"           (click)="actionPrimary($event)"           value="createTask">    <label for="createTask">Create</label>    <input type="radio"           id="searchTask"           [checked]="actionSearch"           (click)="actionPrimary($event)"           value="searchTask">    <label for="searchTask">Search</label>  </div></div><br><div>  <button (click)="multiDeletion()">Delete Multiple</button>  <button (click)="multiFinish()">Finish tasks</button>  <p id="deleteMessage" style="display:none;">Supression en traitement...</p></div><div>  <div *ngFor="let timer of arrayOpenTimer">    <app-timer-task *ngIf="timerIsOpen(timer)" [timerCurrentTask]="timer"                    (updateCurrentTask)="getTasks();" (closeCurrentTask)="selectTimers(timer);"></app-timer-task>  </div>  <ul>    <li *ngFor="let task of tasks">      <div>        <input type="checkbox" class="multiDeleted" id="taskId{{ task.id }}" name="{{ task.name }}"               value="{{ task.id }}"               (click)="selectTask(task)">        - Name : {{ task.name }}        - Id : {{ task.id }}        - Finish : {{ task.isTerminated }}        - Durée : {{ task.duration }}        <button (click)="taskIsTerminated(task)">Finish</button>        <button (click)="editTask(task)">Edit</button>        <button (click)="timerDialog(task)">Timer</button>        <button (click)="deleteTask(task)">Delete</button>      </div>      <div>        <app-edit-task [id]="getId(task)" *ngIf="editTaskActive && (task.id === editCurrentTask.id)" [editCurrentTask]="editCurrentTask"                       (updateCurrentTask)="getTasks()" ></app-edit-task>      </div>    </li>  </ul></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'EditTaskComponent', 'selector': 'app-edit-task'},{'name': 'TasksComponent', 'selector': 'app-tasks'},{'name': 'TimerTaskComponent', 'selector': 'app-timer-task'}];
-    var DIRECTIVES = [];
+    var DIRECTIVES = [{'name': 'TimerDirective', 'selector': '[appTimer]'}];
     var ACTUAL_COMPONENT = {'name': 'TasksComponent'};
 </script>
 <script src="../js/tree.js"></script>

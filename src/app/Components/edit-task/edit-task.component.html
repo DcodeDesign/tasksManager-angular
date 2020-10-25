@@ -1,18 +1,26 @@
-<h2>{{ editCurrentTask.name }}</h2>
-<form [formGroup]="reactForm" (ngSubmit)="onSubmit()">
-  <input type="hidden" value="{{ editCurrentTask.id }}" name="id" class="validate" formControlName="id">
-  <div>
-    <label>Changer le nom de la tâche : </label> <br>
-    <input type="text" value="{{ editCurrentTask.name }}" name="name" class="validate" formControlName="name"/>
-  </div>
+<div class="modal-overlay" (click)="$event.stopPropagation()">
+  <div class="dialog-edit__content">
+  <h2>{{ editCurrentTask.name }}</h2>
+  <form [formGroup]="reactForm" (ngSubmit)="onSubmit($event)">
+    <input type="hidden" value="{{ editCurrentTask.id }}" name="id" class="validate" formControlName="id">
+    <div>
+      <label>Changer le nom de la tâche : </label> <br>
+      <label>
+        <input type="text" value="{{ editCurrentTask.name }}" name="name" class="validate" formControlName="name"/>
+      </label>
+    </div>
 
-  <div>
-    <input name="isTerminated"
-           class="validate"
-           formControlName="isTerminated"
-           type="checkbox"
-           [checked]='editCurrentTask.isTerminated' />
-    <label> : Tâche terminée </label>
+    <div>
+      <label>
+        <input name="isTerminated"
+               class="validate"
+               formControlName="isTerminated"
+               type="checkbox"
+               [checked]='editCurrentTask.isTerminated' />
+      </label>
+      <label> : Tâche terminée </label>
+    </div>
+    <button type="submit" (click)="$event.stopPropagation()" >Mettre à jours</button>
+  </form>
   </div>
-  <button type="submit">Mettre à jours</button>
-</form>
+</div>

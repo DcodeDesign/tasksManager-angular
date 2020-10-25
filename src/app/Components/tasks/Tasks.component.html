@@ -1,57 +1,79 @@
-<div>
-  <input class="fieldPrimary" maxlength="255" (keydown)="actionPrimaryExecute($event);">
-
-  <div class="switch-fiel">
-    <input type="radio"
-           id="createTask"
-           [checked]="actionCreate"
-           (click)="actionPrimary($event)"
-           value="createTask">
-    <label for="createTask">Create</label>
-
-    <input type="radio"
-           id="searchTask"
-           [checked]="actionSearch"
-           (click)="actionPrimary($event)"
-           value="searchTask">
-    <label for="searchTask">Search</label>
-  </div>
-</div>
-
-<br>
-
-<div>
-  <button (click)="multiDeletion()">Delete Multiple</button>
-  <button (click)="multiFinish()">Finish tasks</button>
-  <p id="deleteMessage" style="display:none;">Supression en traitement...</p>
-</div>
-
-<div>
-  <div *ngFor="let timer of arrayOpenTimer">
-    <app-timer-task *ngIf="timerIsOpen(timer)" [timerCurrentTask]="timer"
-                    (updateCurrentTask)="getTasks();" (closeCurrentTask)="selectTimers(timer);"></app-timer-task>
+<div class="component-tasks">
+  <div *ngIf="arrayTasks.length !== 0" class="multiActions__menu">
+    <button (click)="multiDeletion($event)">Delete Multiple</button>
+    <button (click)="multiFinish()">Finish tasks</button>
   </div>
 
-  <ul>
-    <li *ngFor="let task of tasks">
-      <div>
-        <input type="checkbox" class="multiDeleted" id="taskId{{ task.id }}" name="{{ task.name }}"
-               value="{{ task.id }}"
-               (click)="selectTask(task)">
-        - Name : {{ task.name }}
-        - Id : {{ task.id }}
-        - Finish : {{ task.isTerminated }}
-        - Durée : {{ task.duration }}
+  <div class="input-group">
+    <div class="input-field">
+      <label>
+        <input class="input-task" name="" placeholder="tâche..." maxlength="255" (keydown)="actionPrimaryExecute($event);">
+      </label>
+    </div>
+    <div class="input-group__menu">
+      <input type="radio"
+             id="createTask"
+             [checked]="actionCreate"
+             (click)="actionPrimary($event)"
+             value="createTask">
+      <label for="createTask">Create</label>
 
-        <button (click)="taskIsTerminated(task)">Finish</button>
-        <button (click)="editTask(task)">Edit</button>
-        <button (click)="timerDialog(task)">Timer</button>
-        <button (click)="deleteTask(task)">Delete</button>
-      </div>
-      <div>
-        <app-edit-task [id]="getId(task)" *ngIf="editTaskActive && (task.id === editCurrentTask.id)" [editCurrentTask]="editCurrentTask"
-                       (updateCurrentTask)="getTasks()" ></app-edit-task>
-      </div>
-    </li>
-  </ul>
+      <input type="radio"
+             id="searchTask"
+             [checked]="actionSearch"
+             (click)="actionPrimary($event)"
+             value="searchTask">
+      <label for="searchTask">Search</label>
+      <span class="toggle-outside"><span class="toggle-inside"></span></span>
+    </div>
+  </div>
+
+  <div>
+    <div *ngFor="let timer of arrayOpenTimer">
+      <app-timer-task *ngIf="timerIsOpen(timer)"
+                      [timerCurrentTask]="timer"
+                      (updateCurrentTask)="getTasks();"
+                      (closeCurrentTask)="selectTimers(timer);">
+      </app-timer-task>
+    </div>
+
+    <ul class="task-list">
+      <li id="id-task-{{task.id}}"
+          class="task-item"
+          *ngFor="let task of tasks"
+          (click)="selectTask(task)"
+          [ngClass]="isSelectedTask(task)? 'task-item-focus' :'' ">
+        <div>
+          <span class="message-deleted-{{task.id}}">suppression...</span>
+          <label>
+            <input type="checkbox"
+                   class="multiDeleted"
+                   name="{{ task.name }}"
+                   value="{{ task.id }}"
+                   [checked]="isSelectedTask(task)"
+                  >
+          </label>
+          <span [class.isTerminated]="task.isTerminated">
+            {{ task.name }}
+            <span *ngIf="task.duration">
+                - durée : {{ task.duration }}
+            </span>
+          </span>
+          <div class="task-item__menu task-item__menu-{{task.id}}">
+            <button (click)="deleteTask($event, task)">Delete</button>
+            <button (click)="taskIsTerminated($event, task)">Finish</button>
+            <button (click)="editTask($event, task)">Edit</button>
+            <button (click)="timerDialog($event, task)">Timer</button>
+            <button (click)="taskItemMenuHidden($event, task.id)">X</button>
+          </div>
+          <button class="task-item__menu__btn" (click)="taskItemMenuShow($event,task.id)" > menu </button>
+        </div>
+        <div>
+          <app-edit-task [id]="getId(task)" *ngIf="editTaskActive && (task.id === editCurrentTask.id)"
+                         [editCurrentTask]="editCurrentTask"
+                         (updateCurrentTask)="getTasks()"></app-edit-task>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>

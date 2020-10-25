@@ -18,7 +18,8 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>
+                <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -146,7 +147,7 @@
 
 
     <section>
-    
+
         <h3 id="inputs">
             Properties
         </h3>
@@ -231,7 +232,7 @@ export class AppComponent {
         </div>
     </div>
 
-    
+
 </div>
 
 <script src="../js/libs/vis.min.js"></script>
@@ -240,7 +241,7 @@ export class AppComponent {
 <script>
         var COMPONENT_TEMPLATE = '<div><app-tasks></app-tasks></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'EditTaskComponent', 'selector': 'app-edit-task'},{'name': 'TasksComponent', 'selector': 'app-tasks'},{'name': 'TimerTaskComponent', 'selector': 'app-timer-task'}];
-    var DIRECTIVES = [];
+    var DIRECTIVES = [{'name': 'TimerDirective', 'selector': '[appTimer]'}];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
 </script>
 <script src="../js/tree.js"></script>
@@ -254,7 +255,7 @@ export class AppComponent {
 
 
 
-                   
+
 
 
 

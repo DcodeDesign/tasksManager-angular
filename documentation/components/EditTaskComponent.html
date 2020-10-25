@@ -754,7 +754,7 @@ export class EditTaskComponent implements OnInit {
 <script>
         var COMPONENT_TEMPLATE = '<div><h2>{{ editCurrentTask.name }}</h2><form [formGroup]="reactForm" (ngSubmit)="onSubmit()">  <input type="hidden" value="{{ editCurrentTask.id }}" name="id" class="validate" formControlName="id">  <div>    <label>Changer le nom de la tâche : </label> <br>    <input type="text" value="{{ editCurrentTask.name }}" name="name" class="validate" formControlName="name"/>  </div>  <div>    <input name="isTerminated"           class="validate"           formControlName="isTerminated"           type="checkbox"           [checked]=\'editCurrentTask.isTerminated\' />    <label> : Tâche terminée </label>  </div>  <button type="submit">Mettre à jours</button></form></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'EditTaskComponent', 'selector': 'app-edit-task'},{'name': 'TasksComponent', 'selector': 'app-tasks'},{'name': 'TimerTaskComponent', 'selector': 'app-timer-task'}];
-    var DIRECTIVES = [];
+    var DIRECTIVES = [{'name': 'TimerDirective', 'selector': '[appTimer]'}];
     var ACTUAL_COMPONENT = {'name': 'EditTaskComponent'};
 </script>
 <script src="../js/tree.js"></script>

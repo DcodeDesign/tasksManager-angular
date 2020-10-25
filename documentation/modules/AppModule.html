@@ -237,20 +237,20 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClientModule } from &#x27;@angular/common/http&#x27;;
+import { NgModule } from &#x27;@angular/core&#x27;;
 import { AppRoutingModule } from &#x27;./app-routing.module&#x27;;
 import { AppComponent } from &#x27;./app.component&#x27;;
 
-// COMPONENTS
 import { TasksComponent } from &#x27;./Components/tasks/Tasks.component&#x27;;
 
-// IMPORTS
-import {HttpClientModule} from &#x27;@angular/common/http&#x27;;
 import { BrowserModule } from &#x27;@angular/platform-browser&#x27;;
 import { BrowserAnimationsModule } from &#x27;@angular/platform-browser/animations&#x27;;
 import { EditTaskComponent } from &#x27;./Components/edit-task/edit-task.component&#x27;;
-import {FormsModule, ReactiveFormsModule} from &#x27;@angular/forms&#x27;;
+import { FormsModule, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
 import { TimerTaskComponent } from &#x27;./Components/timer-task/timer-task.component&#x27;;
+import { ServiceWorkerModule } from &#x27;@angular/service-worker&#x27;;
+import { environment } from &#x27;../environments/environment&#x27;;
 
 @NgModule({
   declarations: [
@@ -262,10 +262,11 @@ import { TimerTaskComponent } from &#x27;./Components/timer-task/timer-task.comp
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule,
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    ServiceWorkerModule.register(&#x27;ngsw-worker.js&#x27;, { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

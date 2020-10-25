@@ -8,7 +8,7 @@ import {ITasks} from '../Interfaces/ITasks';
   providedIn: 'root'
 })
 export class DataTasksService {
-  private apiUrlTasks = 'http://127.0.0.1:8000/api/tasks';  // URL to web api
+  private apiUrlTasks = 'http://localhost:8888/taskManager_api_symfony/tasks';  // URL to web api
   constructor(private http: HttpClient) {
   }
 

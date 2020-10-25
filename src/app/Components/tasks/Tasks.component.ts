@@ -9,7 +9,7 @@ import {ITasks} from '../../Interfaces/ITasks';
 })
 export class TasksComponent implements OnInit {
   public tasks: ITasks[];
-  private arrayTasks: Array<ITasks> = [];
+  public arrayTasks: Array<ITasks> = [];
   public arrayOpenTimer: Array<ITasks> = [];
   public timerTaskActive: ITasks;
   public editCurrentTask: any;
@@ -18,6 +18,7 @@ export class TasksComponent implements OnInit {
   public actionSearch = false;
   public editTaskActive: boolean;
   public values = '';
+  private foundTimer: boolean;
 
   constructor(private dataTasksService: DataTasksService) {
   }
@@ -42,8 +43,7 @@ export class TasksComponent implements OnInit {
       );
   }
 
-  // tslint:disable-next-line:typedef
-  public actionPrimary(e) {
+  public actionPrimary(e): void {
     const valueActionPrimary = e.target.value;
     console.log(valueActionPrimary);
     if (valueActionPrimary === 'createTask') {
@@ -109,10 +109,16 @@ export class TasksComponent implements OnInit {
     }
   }
 
-  public deleteTask(task: ITasks): void {
+  public deleteTask(e, task: ITasks): void {
+    e.stopPropagation();
     this.dataTasksService.deleteTask(task.id)
       .subscribe(
         () => {
+          document.getElementsByClassName('message-deleted-' + task.id)[0].classList.remove('show');
+          document.getElementById('id-task-' + task.id).style.display = 'none';
+          if (this.isSelectedTask(task)) {
+            this.selectTask(task);
+          }
           if (this.timerIsOpen(task)) {
             this.selectTimers(task);
           }
@@ -124,13 +130,15 @@ export class TasksComponent implements OnInit {
       );
   }
 
-  public multiDeletion(): void {
-    for (let i = 0; i < this.arrayTasks.length; i++) {
-      this.deleteTask(this.arrayTasks[i]);
+  public multiDeletion(e): void {
+    for (const arrayTask of this.arrayTasks) {
+      document.getElementsByClassName('message-deleted-' + arrayTask.id)[0].classList.add('show');
+      this.deleteTask(e, arrayTask);
     }
   }
 
-  public editTask(task: ITasks): void {
+  public editTask(e, task: ITasks): void {
+    e.stopPropagation();
     this.editTaskActive = true;
     this.editCurrentTask = task;
     this.getId(task);
@@ -140,11 +148,13 @@ export class TasksComponent implements OnInit {
     return task.id;
   }
 
-  public taskIsTerminated(task: ITasks): void {
+  public taskIsTerminated(e, task: ITasks): void {
+    e.stopPropagation();
     task.isTerminated = task.isTerminated === false;
     this.dataTasksService.updateTask(task)
       .subscribe(
         () => {
+          this.arrayTasks = [];
           this.getTasks();
         },
         error => {
@@ -178,13 +188,18 @@ export class TasksComponent implements OnInit {
     console.log(this.arrayTasks);
   }
 
+  public isSelectedTask(task: ITasks): boolean {
+    return this.foundTimer = this.arrayTasks.includes(task);
+  }
+
   public multiFinish(): void {
-    for (let i = 0; i < this.arrayTasks.length; i++) {
-      this.taskIsFinish(this.arrayTasks[i]);
+    for (const arrayTask of this.arrayTasks) {
+      this.taskIsFinish(arrayTask);
     }
   }
 
-  public timerDialog(task: ITasks): void {
+  public timerDialog(e, task: ITasks): void {
+    e.stopPropagation();
     this.selectTimers(task);
     this.timerCurrentTask = task;
     this.timerTaskActive = task;
@@ -204,15 +219,20 @@ export class TasksComponent implements OnInit {
   }
 
   public timerIsOpen(task: ITasks): boolean {
-    const foundTimer = this.arrayOpenTimer.includes(task);
-    if (foundTimer) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.foundTimer = this.arrayOpenTimer.includes(task);
   }
 
   public closeTimer(task: ITasks): void {
     this.timerIsOpen(task);
+  }
+
+  public taskItemMenuShow(e, task: number): void {
+    e.stopPropagation();
+    document.getElementsByClassName('task-item__menu-' + task)[0].classList.toggle('show');
+  }
+
+  public taskItemMenuHidden(e, task: number): void {
+    e.stopPropagation();
+    document.getElementsByClassName('task-item__menu-' + task)[0].classList.toggle('show');
   }
 }
